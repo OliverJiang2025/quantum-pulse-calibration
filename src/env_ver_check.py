@@ -2,12 +2,15 @@
 
 import qiskit
 import qiskit_experiments
+import qiskit_dynamics
+import qiskit_aer as aer
 from qiskit_ibm_runtime.fake_provider import FakeValenciaV2
 
-print('----- start testing env -----')
+print('----- start testing env version -----')
 print(f"Qiskit Version: {qiskit.__version__}")
 print(f"Experiments Version: {qiskit_experiments.__version__}")
-
+print(f"Dynamics Version: {qiskit_dynamics.__version__}")
+print(f"aer Version: {aer.__version__}")
 
 backend = FakeValenciaV2()
 print(f"Backend loaded: {backend.name} with {backend.num_qubits} qubits")

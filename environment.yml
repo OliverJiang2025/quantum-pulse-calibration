@@ -1,34 +1,16 @@
 name: quantum_pulse_cal
 channels:
-  - pytorch
-  - conda-forge
-  - defaults
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/r
 dependencies:
-  - python=3.11
-  - pip
-
-  # 科学计算
-  - numpy
-  - scipy
-  - matplotlib
-  - jupyter
   - ipykernel
-
-  # PyTorch
-  - pytorch
-  - torchvision
-
-  # 数据处理
+  - jupyter
+  - matplotlib
+  - numpy
   - pandas
-
-  - pip:
-    # Qiskit
-    - qiskit
-    - qiskit-dynamics        # 脉冲模拟和校准核心库
-    - qiskit-ibm-runtime     # 连接 IBM 量子硬件
-
-    # 可视化
-    - plotly
-
-    # 实验管理
-    - tqdm
+  - pip
+  - python=3.11
+  - pytorch
+  - scipy
+  - torchvision
+prefix: /opt/anaconda3/envs/quantum_pulse_cal

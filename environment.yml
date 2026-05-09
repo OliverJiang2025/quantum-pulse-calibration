@@ -1,0 +1,16 @@
+name: quantum_pulse_cal
+channels:
+  - https://repo.anaconda.com/pkgs/main
+  - https://repo.anaconda.com/pkgs/r
+dependencies:
+  - ipykernel
+  - jupyter
+  - matplotlib
+  - numpy
+  - pandas
+  - pip
+  - python=3.11
+  - pytorch
+  - scipy
+  - torchvision
+prefix: /opt/anaconda3/envs/quantum_pulse_cal

@@ -28,15 +28,6 @@ from qiskit_ibm_runtime.fake_provider import FakeValenciaV2, FakeArmonk
 import sympy
 
 
-# Monkey-patch: register ComplexInfinity (zoo) for the NumPy printer
-# so qiskit-dynamics' pulse-to-signal conversion stops crashing.
-from sympy.printing.numpy import NumPyPrinter
-NumPyPrinter._kc = {**NumPyPrinter._kc, 'ComplexInfinity': 'numpy.inf'}
-NumPyPrinter.known_constants = {
-    **getattr(NumPyPrinter, 'known_constants', {}),
-    'ComplexInfinity': 'numpy.inf',
-}
-
 print("---- 1. Construct a qubit (Solver) ----")
 qubit_freq = 5.0e9      # 5 GHz qubit frequency
 drive_strength = 20e6   # 20 MHz drive strength
@@ -63,7 +54,7 @@ solver = Solver(
     # === KEY FIX 2: Rotating Wave Approximation ===
     # Drop counter-rotating terms above 2*qubit_freq.
     # Standard practice for qubit simulations.
-    rwa_cutoff_freq=2 * qubit_freq,
+
 )
 
 print("---- 2. Initialize Dynamics backend and assign kwargs ----")
@@ -116,9 +107,12 @@ exp_data = spec_exp.run(backend=pulse_backend).block_for_results()
 end_time = time.perf_counter()
 print("---- 4. Finished ----")
 if len(exp_data.data()) > 0:
-    fig = exp_data.figure(0)
+    fig_data = exp_data.figure(0)
+    # In qiskit-experiments 0.7+, figure() returns a FigureData wrapper
+    fig = fig_data.figure if hasattr(fig_data, 'figure') else fig_data
     fig.savefig("spectroscopy_result.png", dpi=150, bbox_inches='tight')
     plt.show()
+
     fit_results = exp_data.analysis_results(0)
     freq = fit_results.value.params['freq']
     print(f"Resonance Frequency: {freq / 1e9:.5f} GHz")

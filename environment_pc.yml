@@ -1,0 +1,22 @@
+name: quantum_pulse_cal
+channels:
+  - pytorch
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - numpy=1.26.4
+  - matplotlib=3.8.4
+  - pip:
+    - --extra-index-url https://download.pytorch.org/whl/cu121
+    - torch==2.3.0+cu121
+    - torchvision==0.18.0+cu121
+    - torchaudio==2.3.0+cu121
+    - qiskit==1.1.2
+    - qiskit-dynamics==0.5.1
+    - qiskit-experiments==0.7.0
+    - qiskit-aer==0.14.2
+    - qiskit-ibm-runtime==0.24.0
+    - jax[cpu]==0.4.28
+    - scipy==1.13.1
